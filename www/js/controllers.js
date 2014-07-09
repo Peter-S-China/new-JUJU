@@ -139,7 +139,7 @@ function GetCodesCtrl($scope, $rootScope,$location) {
     
     $scope.loadItem = function(item) {
         
-        jx.load('http://124.127.127.186:6666/JujuDemo/servlet/Loginservlet?codenum=' + g_codenum ,function(data){
+        jx.load('http://10.0.0.77:8080/JujuDemo/servlet/Loginservlet?codenum=' + g_codenum ,function(data){
                 console.log(JSON.stringify(data));
                 $rootScope.items = data.item4;
                 
@@ -170,7 +170,7 @@ function GetRoomNumCtrl($scope, $rootScope,$location) {
     // load in data from hacker news unless we already have
     if (!$rootScope.items) {
         
-        jx.load('http://124.127.127.186:6666/JujuDemo/servlet/SendHomenum',function(data){
+        jx.load('http://10.0.0.77:8080/JujuDemo/servlet/SendHomenum',function(data){
                 console.log(JSON.stringify(data));
                 $rootScope.items = data.item5;
                 g_homenum = $rootScope.items.homenum;
@@ -206,7 +206,7 @@ function GetRoomNumCtrl($scope, $rootScope,$location) {
 
         }else{
         
-            var g_url = 'http://124.127.127.186:6666/JujuDemo/servlet/Createhome?id='+ g_userid +'&name='+ $scope.formData.name + '&homenum='+ g_homenum +'&userid=1';
+            var g_url = 'http://10.0.0.77:8080/JujuDemo/servlet/Createhome?id='+ g_userid +'&name='+ $scope.formData.name + '&homenum='+ g_homenum +'&userid=1';
             
             console.log(g_url);
             
@@ -261,7 +261,7 @@ function JoinRoomCtrl($scope, $rootScope,$location) {
         
             
             
-         var g_url = 'http://124.127.127.186:6666/JujuDemo/servlet/Createhome?id='+ g_userid +'&name='+ $scope.formData.nickname + '&homenum='+ $scope.formData.roomnum +'&userid=0';
+         var g_url = 'http://10.0.0.77:8080/JujuDemo/servlet/Createhome?id='+ g_userid +'&name='+ $scope.formData.nickname + '&homenum='+ $scope.formData.roomnum +'&userid=0';
      
             g_homenum =  $scope.formData.roomnum;
             
@@ -305,7 +305,7 @@ function GetUserListCtrl($scope, $rootScope) {
    // load in data from hacker news unless we already have
     if (!$rootScope.items) {
         
-        jx.load('http://124.127.127.186:6666/JujuDemo/servlet/SendUserinfo?homenumber='+ g_homenum,function(data){
+        jx.load('http://10.0.0.77:8080/JujuDemo/servlet/SendUserinfo?homenumber='+ g_homenum,function(data){
                 console.log(JSON.stringify(data));
                 $rootScope.items = data.item6;
                 $scope.$apply();
@@ -342,7 +342,7 @@ function GetTeamList1Ctrl($scope, $rootScope,$location) {
     // load in data from hacker news unless we already have
     if (!$rootScope.items) {
         
-        jx.load('http://124.127.127.186:6666/JujuDemo/servlet/Sendballgame?isbegin=1',function(data){
+        jx.load('http://10.0.0.77:8080/JujuDemo/servlet/Sendballgame?isbegin=1',function(data){
                 console.log(JSON.stringify(data));
                 $rootScope.items = data.item7;
                 $scope.$apply();
@@ -374,7 +374,7 @@ function GetTeamList2Ctrl($scope, $rootScope,$location) {
     // load in data from hacker news unless we already have
     if (!$rootScope.items) {
         
-        jx.load('http://124.127.127.186:6666/JujuDemo/servlet/Sendballgame?isbegin=0',function(data){
+        jx.load('http://10.0.0.77:8080/JujuDemo/servlet/Sendballgame?isbegin=0',function(data){
                 console.log(JSON.stringify(data));
                 $rootScope.items = data.item7;
                 $scope.$apply();
@@ -417,7 +417,7 @@ function LoginCtrl($scope,$location,$rootScope) {
         
         if (!$rootScope.items) {
             
-            jx.load('http://124.127.127.186:6666/JujuDemo/servlet/sendnum?username=139',function(data){
+            jx.load('http://10.0.0.77:8080/JujuDemo/servlet/sendnum?username=139',function(data){
                     console.log(JSON.stringify(data));
                     $rootScope.items = data.item3 ;
                     
@@ -447,7 +447,7 @@ function AnonymousChatCtrl($scope, $rootScope,$location){
     $rootScope.items=null;
     if (!$rootScope.items) {
         
-        jx.load('http://124.127.127.186:6666/JujuDemo/servlet/SendMessage?homenum='+g_homenum,function(data){
+        jx.load('http://10.0.0.77:8080/JujuDemo/servlet/SendMessage?homenum='+g_homenum,function(data){
                 console.log(JSON.stringify(data));
                 $rootScope.items = data.item8;
                 $scope.$apply();
@@ -486,7 +486,7 @@ function SendAnonymousMessageCtrl($scope, $rootScope,$location){
         
         }
         
-    var smmurl = "http://124.127.127.186:6666/JujuDemo/servlet/GetMessage?homenum="+g_homenum+"&id="+g_userid+"&message="+$scope.formData.s_message+"&flag=0";
+    var smmurl = "http://10.0.0.77:8080/JujuDemo/servlet/GetMessage?homenum="+g_homenum+"&id="+g_userid+"&message="+$scope.formData.s_message+"&flag=0";
     console.log("------sending----message-------" + smmurl);
         
         

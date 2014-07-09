@@ -1,0 +1,34 @@
+<div class="topcoat-navigation-bar">
+    <div class="topcoat-navigation-bar__item">
+        <a class="topcoat-icon-button" ng-click="slidePage('/step3')">
+            返回
+        </a>
+    </div>
+
+    
+    <div class="topcoat-navigation-bar__item">
+        <a class="topcoat-icon-button is-active">
+           未结束
+        </a>
+    </div>
+
+    <div class="topcoat-navigation-bar__item">
+     <a class="topcoat-icon-button" ng-click="slidePage('/cbsview2')"> 已结束</a>
+    </div>
+
+</div>
+
+<div ng-controller="GetTeamList1Ctrl">
+    <ul class="topcoat-list">
+        <li class="topcoat-list__item" ng-repeat="item in items" ng-click="loadItem(item)">
+            
+         {{item.gameevents}} {{item.date}} {{item.time}}
+         <br>
+         <img width="30" height="30" src="{{item.homeurl}}">  {{item.hometeam}}
+        <br>
+       <img width="30" height="30" src="{{item.visitingurl}}"> {{item.visitingteam}}
+        </li>
+    </ul>
+</div>
+
+<ng-include src="'partials/settingsOverlay.html'"></ng-include>

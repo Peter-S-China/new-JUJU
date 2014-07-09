@@ -1,0 +1,46 @@
+
+<div class="topcoat-navigation-bar" ng-controller="HomeCtrl">
+    <div class="topcoat-navigation-bar__item left quarter">
+        <a class="topcoat-icon-button" ng-click="back()">
+           <<
+        </a>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+        <h1 class="topcoat-navigation-bar__title">创建房间</h1>
+    </div>
+    <div class="topcoat-navigation-bar__item right quarter">
+    
+    </div>
+</div>
+
+
+<div class="topcoat-list__container" ng-controller="GetRoomNumCtrl">
+ 
+ <br>
+
+
+    <lable class="topcoat-text-input">组局号码:{{items.homenum}}</lable>
+    <lable class="topcoat-text-input" ng-show="message">{{ message }}</lable>
+
+<form name="myForm" ng-submit="CreatRoom()">
+    
+    <!-- NAME -->
+  
+  <input
+      type="text"
+      name="name"
+      required
+      class="topcoat-text-input"
+      placeholder="请输入昵称"
+     
+      ng-model="formData.name">
+ 
+     
+    <input value="下一步" type="submit" class="topcoat-text-input"/>
+    
+    <br/>
+</form>
+
+
+</div>
+

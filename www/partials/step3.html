@@ -1,0 +1,45 @@
+<div class="topcoat-navigation-bar" ng-controller="HomeCtrl">
+    <div class="topcoat-navigation-bar__item left quarter">
+        <a class="topcoat-icon-button--quiet" ng-click="slidePage('/step2')">
+            <<
+        </a>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+        <h1 class="topcoat-navigation-bar__title"></h1>
+    </div>
+    <div class="topcoat-navigation-bar__item right quarter">
+      
+    </div>
+</div>
+
+<div class="pad" ng-controller="LoginRoomCtrl">
+<lable
+    ng-click="slidePage('/viewuserlist')"
+    class="topcoat-text-input"
+    ng-show="message">{{ message }}局 查看所有用户
+    
+</lable>
+
+
+<br>
+<div class="anonymousarea" ng-controller="AnonymousChatCtrl">
+
+ <lable class="topcoat-text-input" ng-show="message" ng-click="loadItem(item)">{{ message }}</lable>
+  <lable   ng-repeat="item in items" ng-click="loadItem(item)">
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <br>  {{item.username}}{{item.message}}
+     </lable>
+</div>
+
+
+
+<div class="centerize" style="border:1px solid #ccc;width:90px;margin-top:10px;">
+    <div class="topcoat-button-cbs" ng-click="slidePage('/cbsview')"></div>
+    <span style="width:90px;">猜比赛</span>
+</div>
+
+    
+</div>
+
+
+<ng-include src="'partials/settingsOverlay.html'"></ng-include>

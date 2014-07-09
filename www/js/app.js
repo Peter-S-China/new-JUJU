@@ -33,7 +33,19 @@ var myApp = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.d
              
           $routeProvider.when('/cbsview', {templateUrl: 'partials/CBS_View.html', controller: 'HomeCtrl'});
              
-        $routeProvider.when('/cbsview2', {templateUrl: 'partials/CBS_View2.html', controller: 'HomeCtrl'}); 
+             
+           $routeProvider.when('/flatview', {templateUrl: 'partials/flatview.html', controller: 'HomeCtrl'});  
+         
+           $routeProvider.when('/cbsteamdetail', {templateUrl: 'partials/cbsteamdetail.html', controller: 'HomeCtrl'});
+             
+             $routeProvider.when('/homelostview', {templateUrl: 'partials/homelostview.html', controller: 'HomeCtrl'});
+             
+        $routeProvider.when('/cbsview2', {templateUrl: 'partials/CBS_View2.html', controller: 'HomeCtrl'});
+             
+        
+        
+        $routeProvider.when('/myscoreview', {templateUrl: 'partials/myscoreview.html', controller: 'HomeCtrl'});
+             
              
          $routeProvider.when('/viewuserlist', {templateUrl: 'partials/ViewUserList.html'});
          

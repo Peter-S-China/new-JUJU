@@ -127,6 +127,7 @@ function CameraCtrl($scope) {
 var g_codenum;
 var g_userid;
 var g_homenum;
+var g_againstid;
 
 //-----------------------------
 
@@ -333,11 +334,8 @@ function NavtoGameCtrl($scope) {
 function GetTeamList1Ctrl($scope, $rootScope,$location) {
     
     console.log('获取球队列表信息');
-    
     console.log('---用户名---'+ g_userid);
-    
     console.log('---房间号---'+ g_homenum);
-    
     $rootScope.items = null;
     // load in data from hacker news unless we already have
     if (!$rootScope.items) {
@@ -349,27 +347,25 @@ function GetTeamList1Ctrl($scope, $rootScope,$location) {
                 },'json');
         
     } else {
-        console.log('data already loaded');
+        console.log('获取比赛列表失败');
     }
 
     
     $scope.loadItem = function(item) {
-        
-        console.log('球队详细信息');
-        
        
-    };
+        g_againstid = item.againstid;
+        //console.log('获取球队得>>>againstid<<<<'+ g_againstid);
+        $location.path("/cbsteamdetail");
+        
+    }
     
 }
 
 function GetTeamList2Ctrl($scope, $rootScope,$location) {
     
     console.log('获取球队列表信息');
-    
     console.log('---用户名---'+ g_userid);
-    
     console.log('---房间号---'+ g_homenum);
-    
     $rootScope.items = null;
     // load in data from hacker news unless we already have
     if (!$rootScope.items) {
@@ -487,10 +483,7 @@ function SendAnonymousMessageCtrl($scope, $rootScope,$location){
         }
         
     var smmurl = "http://10.0.0.77:8080/JujuDemo/servlet/GetMessage?homenum="+g_homenum+"&id="+g_userid+"&message="+$scope.formData.s_message+"&flag=0";
-    console.log("------sending----message-------" + smmurl);
-        
-        
-        
+        console.log("------sending----message-------" + smmurl);
         
         $rootScope.items=null;
         if (!$rootScope.items) {
@@ -508,5 +501,168 @@ function SendAnonymousMessageCtrl($scope, $rootScope,$location){
      $location.path("/step3");
         
     }
+
+}
+
+function GetGuessScore($scope,$rootScope){
+   
+   console.log('获取房间号>>>g_homenum<<<<'+ g_homenum);
+   console.log('获取用户ID>>>g_userid<<<<'+ g_userid);
+   var gsurl='http://10.0.0.77:8080/JujuDemo/servlet/Sendballgameuser?userid='+g_userid+'&homenum='+g_homenum;
+    
+    console.log(gsurl);
+    
+  
+    if (!$rootScope.itemss) {
+        
+        jx.load(gsurl,function(data){
+                console.log(JSON.stringify(data));
+                $rootScope.itemss = data.item10;
+                $scope.$apply();
+                },'json');
+        
+    } else {
+        console.log('data already loaded');
+    }
+    
+    
+    }
+
+
+function GetBallAgainstinfo($scope,$rootScope,$location){
+    
+    console.log('获取球队得>>>againstid<<<<'+ g_againstid);
+    var agurl ='http://10.0.0.77:8080/JujuDemo/servlet/BallAgainst?againstid='+g_againstid;
+    
+    console.log(agurl);
+    $rootScope.items=null;
+    if (!$rootScope.items) {
+        
+        jx.load(agurl,function(data){
+                console.log(JSON.stringify(data));
+                $rootScope.items = data.item9;
+                $scope.$apply();
+                },'json');
+        
+    } else {
+        console.log('data already loaded');
+    }
+
+    
+    $scope.formData = {};
+    
+    $scope.homewin=function(){
+        
+        console.log('homewin'+ $scope.formData.guesscore);
+        
+        var hwurl='http://10.0.0.77:8080/JujuDemo/servlet/Getballgamecore?userid='+g_userid+'&againstid='+g_againstid+'&homewincore='+$scope.formData.guesscore+'&homenum='+g_homenum;
+        
+        console.log(hwurl);
+        $rootScope.items=null;
+        if (!$rootScope.items) {
+            
+            jx.load(hwurl,function(data){
+                    console.log(JSON.stringify(data));
+                    $rootScope.items = data.cerateresult;
+                    $scope.$apply();
+                    },'json');
+            
+        } else {
+            console.log('data already loaded');
+        }
+        
+        navigator.notification.alert("完成比赛竞猜",function() {console.log("完成比赛竞猜")},"完成比赛竞猜","关闭");
+        
+        $location.path("/cbsview");
+    }
+    
+    $scope.flat=function(){
+        
+        console.log('flat');
+        $location.path("/flatview");
+        
+        console.log('>>>>flat<<<<'+ $scope.formData.guesscore);
+        
+        var gfurl='http://10.0.0.77:8080/JujuDemo/servlet/Getballgamecore?userid='+g_userid+'&againstid='+g_againstid+'&flatcore='+$scope.formData.guesscore+'&homenum='+g_homenum;
+        
+        console.log(gfurl);
+        $rootScope.items=null;
+        if (!$rootScope.items) {
+            
+            jx.load(gfurl,function(data){
+                    console.log(JSON.stringify(data));
+                    $rootScope.items = data.cerateresult;
+                    $scope.$apply();
+                    },'json');
+            
+        } else {
+            console.log('data already loaded');
+        }
+        
+        navigator.notification.alert("完成比赛竞猜",function() {console.log("完成比赛竞猜")},"完成比赛竞猜","关闭");
+        
+        $location.path("/cbsview");
+        
+        
+        
+    }
+    $scope.visitingwin=function(){
+        
+        console.log('visitingwin');
+        
+        $location.path("/homlostview");
+        
+        console.log('>>>>visitingwin<<<<'+ $scope.formData.guesscore);
+        
+        var hlurl='http://10.0.0.77:8080/JujuDemo/servlet/Getballgamecore?userid='+g_userid+'&againstid='+g_againstid+'&visitingcore='+$scope.formData.guesscore+'&homenum='+g_homenum;
+        
+        console.log(hlurl);
+        $rootScope.items=null;
+        if (!$rootScope.items) {
+            
+            jx.load(hlurl,function(data){
+                    console.log(JSON.stringify(data));
+                    $rootScope.items = data.cerateresult;
+                    $scope.$apply();
+                    },'json');
+            
+        } else {
+            console.log('data already loaded');
+        }
+        
+        navigator.notification.alert("完成比赛竞猜",function() {console.log("完成比赛竞猜")},"完成比赛竞猜","关闭");
+        
+        $location.path("/cbsview");
+        
+
+    }
+
+}
+
+function Sendballgamecore($scope,$rootScope){
+    
+    console.log('获取房间号>>>g_homenum<<<<'+ g_homenum);
+    console.log('获取用户ID>>>g_userid<<<<'+ g_userid);
+    
+    var gusurl='http://10.0.0.77:8080/JujuDemo/servlet/Sendballgamecore?userid='+g_userid+'&homenum='+g_homenum;
+    
+    console.log(gusurl);
+    
+    $rootScope.items=null;
+    
+    if (!$rootScope.items) {
+        
+        jx.load(gusurl,function(data){
+                console.log(JSON.stringify(data));
+                $rootScope.items = data.item11;
+                $scope.$apply();
+                },'json');
+        
+    } else {
+        console.log('data already loaded');
+    }
+    
+
+    
 
 }

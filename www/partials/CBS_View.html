@@ -15,8 +15,9 @@
     <div class="topcoat-navigation-bar__item">
      <a class="topcoat-icon-button" ng-click="slidePage('/cbsview2')"> 已结束</a>
     </div>
-
 </div>
+
+
 
 <div ng-controller="GetTeamList1Ctrl">
     <ul class="topcoat-list">
@@ -24,9 +25,12 @@
             
          {{item.gameevents}} {{item.date}} {{item.time}}
          <br>
-         <img width="30" height="30" src="{{item.homeurl}}">  {{item.hometeam}}
-        <br>
-       <img width="30" height="30" src="{{item.visitingurl}}"> {{item.visitingteam}}
+         <a class="topcoat-button" style="width:200px;">
+             <img src="{{item.homeurl}}">  {{item.hometeam}}</a>
+      <a class="topcoat-button" style="width:200px;">
+         <img src="{{item.visitingurl}}"> {{item.visitingteam}}
+      </a>
+           
         </li>
     </ul>
 </div>

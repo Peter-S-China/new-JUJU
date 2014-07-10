@@ -574,6 +574,8 @@ function GetBallAgainstinfo($scope,$rootScope,$location){
         navigator.notification.alert("完成比赛竞猜",function() {console.log("完成比赛竞猜")},"完成比赛竞猜","关闭");
         
         $location.path("/cbsview");
+        
+        
     }
     
     $scope.flat=function(){
@@ -662,7 +664,35 @@ function Sendballgamecore($scope,$rootScope){
         console.log('data already loaded');
     }
     
+}
+
+function Exithome($scope,$rootScope,$location){
 
     
+  var exurl ='http://10.0.0.77:8080/JujuDemo/servlet/Exithome?id='+g_userid;
+  console.log('>>>>>>>>>>>>>>>' + exurl);
+  
+    $scope.exhome=function(){
+  
+    $rootScope.items = null;
+    
+    if (!$rootScope.items) {
+        
+        jx.load(exurl,function(data){
+                console.log(JSON.stringify(data));
+                $rootScope.items = data.cerateresult;
+                $scope.$apply();
+                },'json');
+        
+    } else {
+        console.log('data already loaded');
+    }
+    
+        navigator.notification.alert("",function() {console.log("您已经退出房间")},"退出房间","确定");
+        
+        $location.path("/step2");
+
+        
+    }
 
 }

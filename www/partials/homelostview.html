@@ -6,18 +6,18 @@
     </div>
 </div>
 
-
+   <a class="topcoat-icon-button" ng-click="slidePage('/myscoreview')">我的竞猜记录</a>
 
 <div class="pad" ng-controller="GetBallAgainstinfo">
   
   <ul class="topcoat-list">
       <li class="topcoat-list__item" ng-repeat="item in items" ng-click="">
           <img src="{{item.homeurl}}">  {{item.hometeam}} <img src="{{item.visitingurl}}">    {{item.visitingteam}}
-              <p><a class="topcoat-button " ng-click="slidePage('/cbsteamdetail','modal')">{{item.homewin}}</a></p>
-              <p><a class="topcoat-button" ng-click="slidePage('/flatview','modal')">{{item.flat}}</a></p>
+              <p><a class="topcoat-button " ng-click="slidePage('/cbsteamdetail','modal')">主胜{{item.homewin}}</a></p>
+              <p><a class="topcoat-button" ng-click="slidePage('/flatview','modal')">平{{item.flat}}</a></p>
               
               
-              <p><a class="topcoat-button is-active" ng-click="">{{item.visitingwin}}</a></p>
+              <p><a class="topcoat-button is-active" ng-click="">主负{{item.visitingwin}}</a></p>
               <input
                   name="guesscore"
                   type="tel"

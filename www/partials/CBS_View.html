@@ -17,6 +17,14 @@
     </div>
 </div>
 
+<div ng-controller="GetGuessScore">
+    <ul class="topcoat-list">
+        <li class="topcoat-list__item" ng-repeat="item in itemsf" ng-click="loadItem(item)">
+            总积分:{{item.usercore}}可用积分:{{item.freecore}}
+            
+        </li>
+    </ul>
+</div>
 
 
 <div ng-controller="GetTeamList1Ctrl">

@@ -128,6 +128,7 @@ var g_codenum;
 var g_userid;
 var g_homenum;
 var g_againstid;
+var g_score;
 
 //-----------------------------
 
@@ -140,7 +141,7 @@ function GetCodesCtrl($scope, $rootScope,$location) {
     
     $scope.loadItem = function(item) {
         
-        jx.load('http://10.0.0.77:8080/JujuDemo/servlet/Loginservlet?codenum=' + g_codenum ,function(data){
+        jx.load('http://124.127.127.186:9000/JujuDemo/servlet/Loginservlet?codenum=' + g_codenum ,function(data){
                 console.log(JSON.stringify(data));
                 $rootScope.items = data.item4;
                 
@@ -171,7 +172,7 @@ function GetRoomNumCtrl($scope, $rootScope,$location) {
     // load in data from hacker news unless we already have
     if (!$rootScope.items) {
         
-        jx.load('http://10.0.0.77:8080/JujuDemo/servlet/SendHomenum',function(data){
+        jx.load('http://124.127.127.186:9000/JujuDemo/servlet/SendHomenum',function(data){
                 console.log(JSON.stringify(data));
                 $rootScope.items = data.item5;
                 g_homenum = $rootScope.items.homenum;
@@ -207,7 +208,7 @@ function GetRoomNumCtrl($scope, $rootScope,$location) {
 
         }else{
         
-            var g_url = 'http://10.0.0.77:8080/JujuDemo/servlet/Createhome?id='+ g_userid +'&name='+ $scope.formData.name + '&homenum='+ g_homenum +'&userid=1';
+            var g_url = 'http://124.127.127.186:9000/JujuDemo/servlet/Createhome?id='+ g_userid +'&name='+ $scope.formData.name + '&homenum='+ g_homenum +'&userid=1';
             
             console.log(g_url);
             
@@ -246,13 +247,11 @@ function JoinRoomCtrl($scope, $rootScope,$location) {
     console.log("------UserID-------" + localStorage.j_username);
     g_userid = localStorage.j_username;
     
+    var creatresult;
    
     $scope.formData = {};
     
     $scope.JoinRoom = function() {
-        
-    
-        
         if(!$scope.formData.roomnum || !$scope.formData.nickname){
         
             $scope.message="请输入房间号和昵称";
@@ -260,9 +259,7 @@ function JoinRoomCtrl($scope, $rootScope,$location) {
         
         }else{
         
-            
-            
-         var g_url = 'http://10.0.0.77:8080/JujuDemo/servlet/Createhome?id='+ g_userid +'&name='+ $scope.formData.nickname + '&homenum='+ $scope.formData.roomnum +'&userid=0';
+        var g_url = 'http://124.127.127.186:9000/JujuDemo/servlet/Createhome?id='+ g_userid +'&name='+ $scope.formData.nickname + '&homenum='+ $scope.formData.roomnum +'&userid=0';
      
             g_homenum =  $scope.formData.roomnum;
             
@@ -276,6 +273,19 @@ function JoinRoomCtrl($scope, $rootScope,$location) {
                 jx.load(g_url,function(data){
                         console.log(JSON.stringify(data));
                         $rootScope.items = data.cerateresult;
+                        creatresult = $rootScope.items;
+                        if(creatresult == '1'){
+                        console.log('加入房间成功');
+                        
+                        $location.path("/step3");
+                        
+                        }else if(creatresult == '0'){
+                        
+                        console.log('加入房间失败');
+                        $scope.message="加入房间失败";
+                        
+                        }
+                        
                         
                         $scope.$apply();
                         },'json');
@@ -283,11 +293,12 @@ function JoinRoomCtrl($scope, $rootScope,$location) {
                 
             } else {
                 
-                console.log('创建房间失败');
+                console.log('加入房间失败');
             }
             
-            $location.path("/step3");
-        
+            
+            
+            
         }
         
        
@@ -306,7 +317,7 @@ function GetUserListCtrl($scope, $rootScope) {
    // load in data from hacker news unless we already have
     if (!$rootScope.items) {
         
-        jx.load('http://10.0.0.77:8080/JujuDemo/servlet/SendUserinfo?homenumber='+ g_homenum,function(data){
+        jx.load('http://124.127.127.186:9000/JujuDemo/servlet/SendUserinfo?homenumber='+ g_homenum,function(data){
                 console.log(JSON.stringify(data));
                 $rootScope.items = data.item6;
                 $scope.$apply();
@@ -340,7 +351,7 @@ function GetTeamList1Ctrl($scope, $rootScope,$location) {
     // load in data from hacker news unless we already have
     if (!$rootScope.items) {
         
-        jx.load('http://10.0.0.77:8080/JujuDemo/servlet/Sendballgame?isbegin=1',function(data){
+        jx.load('http://124.127.127.186:9000/JujuDemo/servlet/Sendballgame?isbegin=1',function(data){
                 console.log(JSON.stringify(data));
                 $rootScope.items = data.item7;
                 $scope.$apply();
@@ -370,7 +381,7 @@ function GetTeamList2Ctrl($scope, $rootScope,$location) {
     // load in data from hacker news unless we already have
     if (!$rootScope.items) {
         
-        jx.load('http://10.0.0.77:8080/JujuDemo/servlet/Sendballgame?isbegin=0',function(data){
+        jx.load('http://124.127.127.186:9000/JujuDemo/servlet/Sendballgame?isbegin=0',function(data){
                 console.log(JSON.stringify(data));
                 $rootScope.items = data.item7;
                 $scope.$apply();
@@ -413,7 +424,7 @@ function LoginCtrl($scope,$location,$rootScope) {
         
         if (!$rootScope.items) {
             
-            jx.load('http://10.0.0.77:8080/JujuDemo/servlet/sendnum?username=139',function(data){
+            jx.load('http://124.127.127.186:9000/JujuDemo/servlet/sendnum?username=139',function(data){
                     console.log(JSON.stringify(data));
                     $rootScope.items = data.item3 ;
                     
@@ -443,7 +454,7 @@ function AnonymousChatCtrl($scope, $rootScope,$location){
     $rootScope.items=null;
     if (!$rootScope.items) {
         
-        jx.load('http://10.0.0.77:8080/JujuDemo/servlet/SendMessage?homenum='+g_homenum,function(data){
+        jx.load('http://124.127.127.186:9000/JujuDemo/servlet/SendMessage?homenum='+g_homenum,function(data){
                 console.log(JSON.stringify(data));
                 $rootScope.items = data.item8;
                 $scope.$apply();
@@ -482,7 +493,7 @@ function SendAnonymousMessageCtrl($scope, $rootScope,$location){
         
         }
         
-    var smmurl = "http://10.0.0.77:8080/JujuDemo/servlet/GetMessage?homenum="+g_homenum+"&id="+g_userid+"&message="+$scope.formData.s_message+"&flag=0";
+    var smmurl = "http://124.127.127.186:9000/JujuDemo/servlet/GetMessage?homenum="+g_homenum+"&id="+g_userid+"&message="+$scope.formData.s_message+"&flag=0";
         console.log("------sending----message-------" + smmurl);
         
         $rootScope.items=null;
@@ -508,16 +519,39 @@ function GetGuessScore($scope,$rootScope){
    
    console.log('获取房间号>>>g_homenum<<<<'+ g_homenum);
    console.log('获取用户ID>>>g_userid<<<<'+ g_userid);
-   var gsurl='http://10.0.0.77:8080/JujuDemo/servlet/Sendballgameuser?userid='+g_userid+'&homenum='+g_homenum;
     
-    console.log(gsurl);
+   var sburl='http://124.127.127.186:9000/JujuDemo/servlet/Getballgameuser?userid='+g_userid+'&homenum='+g_homenum;;
+    console.log('>>>>发送当前用户信息给服务器<<<<'+ sburl);
     
+    $rootScope.itemf=null;
+    if (!$rootScope.itemf) {
+        
+        jx.load(sburl,function(data){
+                console.log(JSON.stringify(data));
+                $rootScope.itemf = data.cerateresult;
+                $scope.$apply();
+                },'json');
+        
+    } else {
+        console.log('data already loaded');
+    }
   
-    if (!$rootScope.itemss) {
+    
+    
+    var gsurl='http://124.127.127.186:9000/JujuDemo/servlet/Sendballgameuser?userid='+g_userid+'&homenum='+g_homenum;
+    console.log('>>>>获取积分从服务器<<<<'+ gsurl);
+    
+    $rootScope.itemsf=null;
+    
+    if (!$rootScope.itemsf) {
         
         jx.load(gsurl,function(data){
                 console.log(JSON.stringify(data));
-                $rootScope.itemss = data.item10;
+                $rootScope.itemsf = data.item10;
+                
+                //g_score = $rootScope.itemss.freecore;
+                //console.log('>>>>>>>>>用户可用积分<<<<<<<<'+ $rootScope.itemsf.freecore);
+                
                 $scope.$apply();
                 },'json');
         
@@ -526,13 +560,20 @@ function GetGuessScore($scope,$rootScope){
     }
     
     
+    
+    
+    $scope.loadItem = function(item) {
+        navigator.notification.alert(item.usercore,function() {console.log("Alert success")},"My Alert","Close");
+    };
+
+    
     }
 
 
 function GetBallAgainstinfo($scope,$rootScope,$location){
     
     console.log('获取球队得>>>againstid<<<<'+ g_againstid);
-    var agurl ='http://10.0.0.77:8080/JujuDemo/servlet/BallAgainst?againstid='+g_againstid;
+    var agurl ='http://124.127.127.186:9000/JujuDemo/servlet/BallAgainst?againstid='+g_againstid;
     
     console.log(agurl);
     $rootScope.items=null;
@@ -551,11 +592,17 @@ function GetBallAgainstinfo($scope,$rootScope,$location){
     
     $scope.formData = {};
     
+    
+    
     $scope.homewin=function(){
         
         console.log('homewin'+ $scope.formData.guesscore);
+        if($scope.formData.guesscore>500){
         
-        var hwurl='http://10.0.0.77:8080/JujuDemo/servlet/Getballgamecore?userid='+g_userid+'&againstid='+g_againstid+'&homewincore='+$scope.formData.guesscore+'&homenum='+g_homenum;
+            navigator.notification.alert("提示",function() {console.log("Alert success")},"你的积分不够","确定");
+        }
+        
+        var hwurl='http://124.127.127.186:9000/JujuDemo/servlet/Getballgamecore?userid='+g_userid+'&againstid='+g_againstid+'&homewincore='+$scope.formData.guesscore+'&homenum='+g_homenum;
         
         console.log(hwurl);
         $rootScope.items=null;
@@ -573,7 +620,7 @@ function GetBallAgainstinfo($scope,$rootScope,$location){
         
         navigator.notification.alert("完成比赛竞猜",function() {console.log("完成比赛竞猜")},"完成比赛竞猜","关闭");
         
-        $location.path("/cbsview");
+        $location.path("/step3");
         
         
     }
@@ -583,9 +630,15 @@ function GetBallAgainstinfo($scope,$rootScope,$location){
         console.log('flat');
         $location.path("/flatview");
         
+        
         console.log('>>>>flat<<<<'+ $scope.formData.guesscore);
         
-        var gfurl='http://10.0.0.77:8080/JujuDemo/servlet/Getballgamecore?userid='+g_userid+'&againstid='+g_againstid+'&flatcore='+$scope.formData.guesscore+'&homenum='+g_homenum;
+        if($scope.formData.guesscore>500){
+            
+            navigator.notification.alert("提示",function() {console.log("Alert success")},"你的积分不够","确定");
+        }
+        
+        var gfurl='http://124.127.127.186:9000/JujuDemo/servlet/Getballgamecore?userid='+g_userid+'&againstid='+g_againstid+'&flatcore='+$scope.formData.guesscore+'&homenum='+g_homenum;
         
         console.log(gfurl);
         $rootScope.items=null;
@@ -603,7 +656,7 @@ function GetBallAgainstinfo($scope,$rootScope,$location){
         
         navigator.notification.alert("完成比赛竞猜",function() {console.log("完成比赛竞猜")},"完成比赛竞猜","关闭");
         
-        $location.path("/cbsview");
+        $location.path("/step3");
         
         
         
@@ -616,7 +669,12 @@ function GetBallAgainstinfo($scope,$rootScope,$location){
         
         console.log('>>>>visitingwin<<<<'+ $scope.formData.guesscore);
         
-        var hlurl='http://10.0.0.77:8080/JujuDemo/servlet/Getballgamecore?userid='+g_userid+'&againstid='+g_againstid+'&visitingcore='+$scope.formData.guesscore+'&homenum='+g_homenum;
+        if($scope.formData.guesscore>500){
+            
+            navigator.notification.alert("提示",function() {console.log("Alert success")},"你的积分不够","确定");
+        }
+        
+        var hlurl='http://124.127.127.186:9000/JujuDemo/servlet/Getballgamecore?userid='+g_userid+'&againstid='+g_againstid+'&visitingcore='+$scope.formData.guesscore+'&homenum='+g_homenum;
         
         console.log(hlurl);
         $rootScope.items=null;
@@ -634,7 +692,7 @@ function GetBallAgainstinfo($scope,$rootScope,$location){
         
         navigator.notification.alert("完成比赛竞猜",function() {console.log("完成比赛竞猜")},"完成比赛竞猜","关闭");
         
-        $location.path("/cbsview");
+        $location.path("/step3");
         
 
     }
@@ -646,7 +704,7 @@ function Sendballgamecore($scope,$rootScope){
     console.log('获取房间号>>>g_homenum<<<<'+ g_homenum);
     console.log('获取用户ID>>>g_userid<<<<'+ g_userid);
     
-    var gusurl='http://10.0.0.77:8080/JujuDemo/servlet/Sendballgamecore?userid='+g_userid+'&homenum='+g_homenum;
+    var gusurl='http://124.127.127.186:9000/JujuDemo/servlet/Sendballgamecore?userid='+g_userid+'&homenum='+g_homenum;
     
     console.log(gusurl);
     
@@ -669,8 +727,8 @@ function Sendballgamecore($scope,$rootScope){
 function Exithome($scope,$rootScope,$location){
 
     
-  var exurl ='http://10.0.0.77:8080/JujuDemo/servlet/Exithome?id='+g_userid;
-  console.log('>>>>>>>>>>>>>>>' + exurl);
+  var exurl ='http://124.127.127.186:9000/JujuDemo/servlet/Exithome?id='+g_userid;
+  //console.log('>>>>>>>>>>>>>>>' + exurl);
   
     $scope.exhome=function(){
   

@@ -1,50 +1,47 @@
-
-<div class="topcoat-navigation-bar" ng-controller="HomeCtrl">
-    <div class="topcoat-navigation-bar__item left quarter">
-        <a class="topcoat-icon-button" ng-click="slidePage('/step2')">
-            <<        </a>
+<div class="loginpage">
+<div class="new-navigation-bar" ng-controller="HomeCtrl">
+    <div class="new-navigation-bar__item left quarter">
+        <a class="new-icon-button" ng-click="slidePage('/step2')">
+            <
+        </a>
     </div>
-    <div class="topcoat-navigation-bar__item center half">
-        <h1 class="topcoat-navigation-bar__title">加入房间</h1>
+    <div class="new-navigation-bar__item center half">
+        <h1 class="new-navigation-bar__title">加入房间</h1>
     </div>
-    <div class="topcoat-navigation-bar__item right quarter">
+    <div class="new-navigation-bar__item right quarter">
         
     </div>
 </div>
 
-<div class="topcoat-list__container list"  ng-controller="JoinRoomCtrl">
+<div  ng-controller="JoinRoomCtrl">
     <br>
-    <lable class="topcoat-text-input" ng-show="message">{{ message }}</lable>
-    
-   <form name="myForm" ng-submit="JoinRoom()">
-       
-       
+    <lable class="new-text-input" ng-show="message">{{ message }}</lable>
     <!--房间号-->
     <input
         type="tel"
         required
-        class="topcoat-text-input"
+        class="new-text-input"
         name="roomnum"
         placeholder="输入您要加入的房间号"
         ng-model="formData.roomnum">
         
-  <!--昵称-->
+     <!--昵称-->
      <input
          type="text"
          required
-         class="topcoat-text-input"
+         class="new-text-input"
          name="nickname"
          placeholder="输入您的昵称"
          
          ng-model="formData.nickname" >
         
     
-    <input value="下一步" type="submit" class="topcoat-text-input"/>
+    
+    <a ng-click="JoinRoom()" class="next-icon-button"/>下一步</a>
        
-   </form>
+  
         
 </div>
 
+</div>
 
-
-<ng-include src="'partials/settingsOverlay.html'"></ng-include>

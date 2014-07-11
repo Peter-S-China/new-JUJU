@@ -1,25 +1,30 @@
-<div class="topcoat-navigation-bar" ng-controller="HomeCtrl">
-    <div class="topcoat-navigation-bar__item left quarter">
-        <a style="margin-top:10px;"class="topcoat-button" ng-click="slidePage('/')">
-           <<
+<div class="loginpage">
+    
+
+<div class="new-navigation-bar" ng-controller="HomeCtrl">
+    <div class="new-navigation-bar__item left quarter">
+        <a style="margin-top:10px;"class="new-button" ng-click="slidePage('/')">
+           <
         </a>
     </div>
-    <div class="topcoat-navigation-bar__item center half">
-        <h1 class="topcoat-navigation-bar__title">验证码</h1>
+    <div class="new-navigation-bar__item center half">
+        <h1 class="new-navigation-bar__title">用户登录</h1>
     </div>
-    <div class="topcoat-navigation-bar__item right quarter">
+    <div class="new-navigation-bar__item right quarter">
 
     </div>
 </div>
 
 
-<div class="topcoat-list__container list" ng-controller="GetCodesCtrl">
+<div  ng-controller="GetCodesCtrl">
     
-  <ul class="topcoat-list">
-           <li  class="topcoat-list__item" ng-repeat="item in items" ng-click="loadItem(item)">
-             <input style="width:150px;" readonly="readonly"  type="tel" required class="topcoat-text-input" value="{{items.result}}" placeholder="自动获取验证码">       <a class="topcoat-button--cta"  >下一步</a>
-           </li>
-       </ul>
+  <div class="centerize" style="margin-top:30px;">
+           <div ng-repeat="item in items" ng-click="loadItem(item)">
+          验证码 <span style="margin:10px;"> {{items.result}}</span>&nbsp;&nbsp;
+            <a class="new-button--cta"  >下一步</a>
+           </div>
+       </div>
 </div>
 
-<ng-include src="'partials/settingsOverlay.html'"></ng-include>
+</div>
+

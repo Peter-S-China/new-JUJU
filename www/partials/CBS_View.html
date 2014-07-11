@@ -16,7 +16,7 @@
      <a class="topcoat-icon-button" ng-click="slidePage('/cbsview2')"> 已结束</a>
     </div>
 </div>
-
+<!--
 <div ng-controller="GetGuessScore">
     <ul class="topcoat-list">
         <li class="topcoat-list__item" ng-repeat="item in itemsf" ng-click="loadItem(item)">
@@ -26,17 +26,17 @@
     </ul>
 </div>
 
-
-<div ng-controller="GetTeamList1Ctrl">
+-->
+<div class="GGGpad" ng-controller="GetTeamList1Ctrl">
     <ul class="topcoat-list">
         <li class="topcoat-list__item" ng-repeat="item in items" ng-click="loadItem(item)">
             
          {{item.gameevents}} {{item.date}} {{item.time}}
          <br>
-         <a class="topcoat-button" style="width:200px;">
-             <img src="{{item.homeurl}}">  {{item.hometeam}}</a>
-      <a class="topcoat-button" style="width:200px;">
-         <img src="{{item.visitingurl}}"> {{item.visitingteam}}
+         <a class="new-button--cta" style="width:200px;">
+             <img  onerror="this.src='./beijing1.png'" src="{{item.homeurl}}">  {{item.hometeam}}</a><br>
+      <a class="new-button--cta" style="width:200px;">
+         <img  onerror="this.src='beijing1.png'" src="{{item.visitingurl}}"> {{item.visitingteam}}
       </a>
            
         </li>

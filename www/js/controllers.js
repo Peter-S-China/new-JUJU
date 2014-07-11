@@ -521,7 +521,7 @@ function GetGuessScore($scope,$rootScope){
    console.log('获取用户ID>>>g_userid<<<<'+ g_userid);
     
    var sburl='http://124.127.127.186:9000/JujuDemo/servlet/Getballgameuser?userid='+g_userid+'&homenum='+g_homenum;;
-    console.log('>>>>发送当前用户信息给服务器<<<<'+ sburl);
+    console.log('>>>>发送当前用户信息给服务器获取初始积分<<<<'+ sburl);
     
     $rootScope.itemf=null;
     if (!$rootScope.itemf) {
@@ -549,9 +549,6 @@ function GetGuessScore($scope,$rootScope){
                 console.log(JSON.stringify(data));
                 $rootScope.itemsf = data.item10;
                 
-                //g_score = $rootScope.itemss.freecore;
-                //console.log('>>>>>>>>>用户可用积分<<<<<<<<'+ $rootScope.itemsf.freecore);
-                
                 $scope.$apply();
                 },'json');
         
@@ -559,11 +556,10 @@ function GetGuessScore($scope,$rootScope){
         console.log('data already loaded');
     }
     
-    
-    
-    
-    $scope.loadItem = function(item) {
-        navigator.notification.alert(item.usercore,function() {console.log("Alert success")},"My Alert","Close");
+        $scope.loadItem = function(item) {
+        navigator.notification.alert(item.freecore,function() {console.log("可用积分" + item.freecore)},"可用积分","确定");
+        
+        
     };
 
     
@@ -597,12 +593,14 @@ function GetBallAgainstinfo($scope,$rootScope,$location){
     $scope.homewin=function(){
         
         console.log('homewin'+ $scope.formData.guesscore);
-        if($scope.formData.guesscore>500){
         
-            navigator.notification.alert("提示",function() {console.log("Alert success")},"你的积分不够","确定");
-        }
+        if($scope.formData.guesscore>500-$scope.formData.guesscore){
+        
+            navigator.notification.alert("提示",function() {console.log("Alert success")},"您的可用积分不够","确定");
+        }else{
         
         var hwurl='http://124.127.127.186:9000/JujuDemo/servlet/Getballgamecore?userid='+g_userid+'&againstid='+g_againstid+'&homewincore='+$scope.formData.guesscore+'&homenum='+g_homenum;
+        }
         
         console.log(hwurl);
         $rootScope.items=null;
@@ -618,7 +616,7 @@ function GetBallAgainstinfo($scope,$rootScope,$location){
             console.log('data already loaded');
         }
         
-        navigator.notification.alert("完成比赛竞猜",function() {console.log("完成比赛竞猜")},"完成比赛竞猜","关闭");
+        //navigator.notification.alert("完成比赛竞猜",function() {console.log("完成比赛竞猜")},"完成比赛竞猜","关闭");
         
         $location.path("/step3");
         
@@ -633,13 +631,13 @@ function GetBallAgainstinfo($scope,$rootScope,$location){
         
         console.log('>>>>flat<<<<'+ $scope.formData.guesscore);
         
-        if($scope.formData.guesscore>500){
+        if($scope.formData.guesscore>500-$scope.formData.guesscore){
             
             navigator.notification.alert("提示",function() {console.log("Alert success")},"你的积分不够","确定");
-        }
+        }else{
         
         var gfurl='http://124.127.127.186:9000/JujuDemo/servlet/Getballgamecore?userid='+g_userid+'&againstid='+g_againstid+'&flatcore='+$scope.formData.guesscore+'&homenum='+g_homenum;
-        
+        }
         console.log(gfurl);
         $rootScope.items=null;
         if (!$rootScope.items) {
@@ -654,7 +652,7 @@ function GetBallAgainstinfo($scope,$rootScope,$location){
             console.log('data already loaded');
         }
         
-        navigator.notification.alert("完成比赛竞猜",function() {console.log("完成比赛竞猜")},"完成比赛竞猜","关闭");
+        //navigator.notification.alert("完成比赛竞猜",function() {console.log("完成比赛竞猜")},"完成比赛竞猜","关闭");
         
         $location.path("/step3");
         
@@ -669,13 +667,13 @@ function GetBallAgainstinfo($scope,$rootScope,$location){
         
         console.log('>>>>visitingwin<<<<'+ $scope.formData.guesscore);
         
-        if($scope.formData.guesscore>500){
+        if($scope.formData.guesscore>500-$scope.formData.guesscore){
             
             navigator.notification.alert("提示",function() {console.log("Alert success")},"你的积分不够","确定");
-        }
+        }else{
         
         var hlurl='http://124.127.127.186:9000/JujuDemo/servlet/Getballgamecore?userid='+g_userid+'&againstid='+g_againstid+'&visitingcore='+$scope.formData.guesscore+'&homenum='+g_homenum;
-        
+        }
         console.log(hlurl);
         $rootScope.items=null;
         if (!$rootScope.items) {
@@ -690,7 +688,7 @@ function GetBallAgainstinfo($scope,$rootScope,$location){
             console.log('data already loaded');
         }
         
-        navigator.notification.alert("完成比赛竞猜",function() {console.log("完成比赛竞猜")},"完成比赛竞猜","关闭");
+        //navigator.notification.alert("完成比赛竞猜",function() {console.log("完成比赛竞猜")},"完成比赛竞猜","关闭");
         
         $location.path("/step3");
         
